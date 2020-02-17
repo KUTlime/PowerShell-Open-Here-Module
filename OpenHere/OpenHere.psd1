@@ -27,7 +27,7 @@ Author = 'Radek Zahradník, Ph.D.'
 CompanyName = 'Radek Zahradník, Ph.D.'
 
 # Copyright statement for this module
-Copyright = '(c) Radek Zahradník, Ph.D.. All rights reserved.'
+Copyright = '(c) Radek Zahradník, Ph.D. All rights reserved.'
 
 # Description of the functionality provided by this module
 # Description = ''
