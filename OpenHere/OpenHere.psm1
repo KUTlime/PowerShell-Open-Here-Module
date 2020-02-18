@@ -71,7 +71,7 @@ Function Out-Icon
       .PARAMETER FilePath
       Specifies a FilePath to the EXE file from the icon should be extracted. The input can be a string or a valid instance of the System.IO.FileInfo class.
       .EXAMPLE
-      Get-Icon -Path $env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe
+      Get-Icon -Path $env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe | Out-Icon -FilePath D:\Icon.ico
       .NOTES
       - This function is a simple wrapper for OutFile and a call of ToBitmap().Save(FilePath) method from the input icon instance.
       .LINK
