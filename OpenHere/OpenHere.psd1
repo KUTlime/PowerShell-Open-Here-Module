@@ -12,7 +12,7 @@
 RootModule = 'OpenHere'
 
 # Version number of this module.
-ModuleVersion = '0.0.1'
+ModuleVersion = '1.0.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -95,22 +95,26 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+        Tags = @('WindowsPowerShell', 'OpenHere', 'Open', 'Here', 'Shortcut')
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/KUTlime/PowerShell-Open-Here-Module/blob/master/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/KUTlime/PowerShell-Open-Here-Module'
 
         # A URL to an icon representing this module.
         # IconUri = ''
 
-        # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        # Flag to indicate whether the module requires explicit user acceptance for install/update/save
+        RequireLicenseAcceptance = $false
 
-        # Prerelease string of this module
-        # Prerelease = ''
+        # ReleaseNotes of this module
+        ReleaseNotes = @'
+v1.0.0: (2020-02-20)
+- Initial release
+- Implementation for Windows PowerShell shortcut.
+'@
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
         # RequireLicenseAcceptance = $false
