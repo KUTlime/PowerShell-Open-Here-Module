@@ -32,15 +32,15 @@ Set-OpenHereWindowsPowerShellShortcut
 
 For custom shortcut name, fill parameters accordingly:
 ```powershell
-Set-OpenHereWindowsPowerShellShortcut -RootName 'Old PowerShell' -OpenHere 'I`m lazy' -OpenHereAsAdmin 'I`m lazy admin`
+Set-OpenHereWindowsPowerShellShortcut -RootName 'Old PowerShell' -OpenHere 'I''m lazy' -OpenHereAsAdmin 'I''m lazy admin`
 ```
 
 or the equivalent with a long line continuation:
 ```powershell
 Set-OpenHereWindowsPowerShellShortcut`
 -RootName 'Old PowerShell' `
--OpenHere 'I`m lazy' `
--OpenHereAsAdmin 'I`m lazy admin
+-OpenHere 'I''m lazy' `
+-OpenHereAsAdmin 'I''m lazy admin
 ```
 
 To remove the shortcut with any settings, just call:
