@@ -1,22 +1,22 @@
 # PowerShell "Open Here" Module
-PowerShell module that enables "Open here" functionality for PowerShell.
+PowerShell module that enables "Open here" shortcuts functionality for PowerShell.
 
 # Introduction
-OpenHere is a PowerShell module for installation of shell shortcuts into the context menu (the right mouse button click or [the menu key](https://en.wikipedia.org/wiki/Menu_key)) for on Microsoft Windows.
+OpenHere is a PowerShell module for installation of shell shortcuts into the context menu (the right mouse button click or [the menu key](https://en.wikipedia.org/wiki/Menu_key)) for Microsoft Windows.
 
-The shortcuts will open desired shell in the current location, e.g. `$PWD` for Windows PowerShell will be set to the location from which the shortcut was invoked.
+The shortcuts will open desired shell in the current location, e.g. for Windows PowerShell `$PWD` will be set to the location from which the shortcut was invoked.
 
 ![Preview](https://github.com/KUTlime/PowerShell-Open-Here-Module/raw/master/assets/Default.png)
 ![Preview](https://raw.githubusercontent.com/KUTlime/PowerShell-Open-Here-Module/master/assets/Custom.png)
-
 
 
 # Main features
 - Shortcut installation/removal for Windows PowerShell.
 - Open here with non-elevated privileges shortcut.
 - Open here with elevated privileges shortcut.
-- Default settings for easy-to-use.
+- Default setting for easy-to-use.
 - Fully customizable shortcut names.
+- Shortcut availability on directory, drive, directory background, user's desktop.
 
 # Basic use
 To install the OpenHere module, just type following command your PowerShell session with elevated privileges.
@@ -35,7 +35,7 @@ For custom shortcut name, fill parameters accordingly:
 Set-OpenHereWindowsPowerShellShortcut -RootName 'Old PowerShell' -OpenHere 'I`m lazy' -OpenHereAsAdmin 'I`m lazy admin`
 ```
 
-or the equivalent with the long line continuation:
+or the equivalent with a long line continuation:
 ```powershell
 Set-OpenHereWindowsPowerShellShortcut`
 -RootName 'Old PowerShell' `
@@ -57,6 +57,9 @@ Yes, override the `Icon.ico` file in `%LOCALAPPDATA%\OpenHere\ShellType` and you
 
 ## Can I override the names?
 Yes, just run `Set-OpenHereWindowsPowerShellShortcut` with a new configuration.
+
+## Is the name limited to English?
+No, the shortcut names supports Unicode and this is only limitation as I'm aware of.
 
 # Planned features
 * Terminal shortcut
