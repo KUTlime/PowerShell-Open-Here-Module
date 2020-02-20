@@ -12,7 +12,7 @@
 RootModule = 'OpenHere'
 
 # Version number of this module.
-ModuleVersion = '1.0.1'
+ModuleVersion = '1.0.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -111,6 +111,9 @@ PrivateData = @{
 
         # ReleaseNotes of this module
         ReleaseNotes = @'
+v1.0.2: (2020-02-20)
+- Support of shell type for icon provider.
+
 v1.0.1: (2020-02-20)
 - Fixing minimal PowerShell version from 1.x to 5.0.
 

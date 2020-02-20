@@ -47,7 +47,7 @@ function Get-IconAsset
     New-Item "$env:LOCALAPPDATA\OpenHere\$ShellType" -ItemType Directory -Force | Write-Verbose
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $wc = New-Object System.Net.WebClient
-    $wc.DownloadFile('https://raw.githubusercontent.com/KUTlime/PowerShell-Open-Here-Module/master/assets/PowerShell.ico', "$env:LOCALAPPDATA\OpenHere\$ShellType\Icon.ico")
+    $wc.DownloadFile("https://raw.githubusercontent.com/KUTlime/PowerShell-Open-Here-Module/master/assets/$ShellType.ico", "$env:LOCALAPPDATA\OpenHere\$ShellType\Icon.ico")
 }
 
 function Set-OpenHereWindowsPowerShellShortcut
