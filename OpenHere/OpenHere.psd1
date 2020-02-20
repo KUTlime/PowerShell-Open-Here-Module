@@ -33,7 +33,7 @@ Copyright = '(c) Radek Zahradník, Ph.D. All rights reserved.'
 # Description = ''
 
 # Minimum version of the PowerShell engine required by this module
-# PowerShellVersion = ''
+PowerShellVersion = '1.0.0.0'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
