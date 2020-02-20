@@ -67,6 +67,9 @@ No, the shortcut names supports Unicode and this is only limitation as I'm aware
   * A customizable functionality. The Windows installation of PowerShell Core doesn't support any customization of the shell shortcuts so far.
   * Waiting for PowerShell Core 7.0.0 RTM as primary support target.
 
+# Links
+[OpenHere module at PowerShell Gallery](https://www.powershellgallery.com/packages/OpenHere)
+
 # Attribution
 [Get-Icon](https://github.com/Duffney/PowerShell/blob/master/FileSystems/Get-Icon.ps1)<br>
 [PowerShell icon](https://www.freeiconspng.com/downloadimg/17194)
