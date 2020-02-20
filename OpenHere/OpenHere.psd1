@@ -30,7 +30,7 @@ CompanyName = 'Radek Zahradník, Ph.D.'
 Copyright = '(c) Radek Zahradník, Ph.D. All rights reserved.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = 'This module that enables "Open here" shortcuts functionality for PowerShell.'
 
 # Minimum version of the PowerShell engine required by this module
 PowerShellVersion = '1.0.0.0'
