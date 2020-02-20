@@ -17,6 +17,7 @@ The shortcuts will open desired shell in the current location, e.g. for Windows 
 - Default setting for easy-to-use.
 - Fully customizable shortcut names.
 - Shortcut availability on directory, drive, directory background, user's desktop.
+- Well documented
 
 # Basic use
 To install the OpenHere module, just type following command your PowerShell session with elevated privileges.
@@ -46,6 +47,18 @@ Set-OpenHereWindowsPowerShellShortcut`
 To remove the shortcut with any settings, just call:
 ```powershell
 Remove-OpenHereWindowsPowerShellShortcut
+```
+
+For more details about setting/removing process, type:
+```powershell
+Set-OpenHereWindowsPowerShellShortcut -Verbose
+Remove-OpenHereWindowsPowerShellShortcut -Verbose
+```
+respectively. 
+
+For more examples, type: 
+```powershell
+Get-Help Set-OpenHereWindowsPowerShellShortcut -Examples
 ```
 
 # FAQ

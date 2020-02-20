@@ -52,6 +52,45 @@ function Get-IconAsset
 
 function Set-OpenHereWindowsPowerShellShortcut
 {
+    <#
+    .SYNOPSIS
+        Sets Open here shortcut into the system shell.
+    .DESCRIPTION
+        Sets Open here shortcut into the context menu in the system shell for directory, the directory background, drives and the user's desktop.
+    .EXAMPLE
+        PS C:\> Set-OpenHereWindowsPowerShellShortcut
+        Creates the default shortcut in the system. "Windows PowerShell" as root folder name, "Open here" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used.
+    .EXAMPLE
+        PS C:\> Set-OpenHereWindowsPowerShellShortcut -RootName 'Old PowerShell'
+        Creates a customized shortcut in the system. "Old PowerShell" as root folder name, "Open here" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used.
+    .EXAMPLE
+        PS C:\> Set-OpenHereWindowsPowerShellShortcut -OpenHere 'I''m lazy'
+        Creates a customized shortcut in the system. "Windows PowerShell" as root folder name, "I'm lazy" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used.
+    .EXAMPLE
+        PS C:\> Set-OpenHereWindowsPowerShellShortcut -OpenHereAsAdmin 'I''m lazy admin'
+        Creates a customized shortcut in the system. "Windows PowerShell" as root folder name, "Open here" as non-elevated privileges command name and "I''m lazy admin" elevated privileges command name will be used.
+    .EXAMPLE
+        PS C:\> Set-OpenHereWindowsPowerShellShortcut -RootName 'Old PowerShell' -OpenHere 'I''m lazy'
+        Creates a customized shortcut in the system. "Old PowerShell" as root folder name, "I'm lazy" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used.
+    .EXAMPLE
+        PS C:\> Set-OpenHereWindowsPowerShellShortcut -OpenHere 'I''m lazy' -OpenHereAsAdmin 'I''m lazy admin'
+        Creates a fully customized shortcut in the system. "Windows PowerShell" as root folder name, "I'm lazy" as non-elevated privileges command name and "I'm lazy admin" elevated privileges command name will be used.
+    .EXAMPLE
+        PS C:\> Set-OpenHereWindowsPowerShellShortcut -RootName 'Old PowerShell' -OpenHere 'I''m lazy' -OpenHereAsAdmin 'I''m lazy admin'
+        Creates a fully customized shortcut in the system. "Old PowerShell" as root folder name, "I'm lazy" as non-elevated privileges command name and "I'm lazy admin" elevated privileges command name will be used.
+    .EXAMPLE
+        PS C:\> Set-OpenHereWindowsPowerShellShortcut -Verbose
+        Creates the default shortcut in the system and the building process will be verbose to user. "Windows PowerShell" as root folder name, "Open here" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used.
+    .LINK
+        https://github.com/KUTlime/PowerShell-Open-Here-Module
+    .INPUTS
+        System.String
+    .OUTPUTS
+        Shell shortcut visible in the context menu.
+    .NOTES
+        To override the default shortcut icon, override the Icon.ico file in %LOCALAPPDATA%\OpenHere\[ShellType].
+        The context menu can be invoked from the menu button and by the right mouse button click.
+    #>
     [CmdletBinding()]
     Param (
         [Parameter(
@@ -142,6 +181,27 @@ function Set-OpenHereWindowsPowerShellShortcut
 
 function Remove-OpenHereWindowsPowerShellShortcut
 {
+        <#
+    .SYNOPSIS
+        Removes the Open here shortcut.
+    .DESCRIPTION
+        Removes the Open here shortcut from all locations in the system shell.
+    .EXAMPLE
+        PS C:\> Remove-OpenHereWindowsPowerShellShortcut
+        Removes the default shortcut in the system.
+    .EXAMPLE
+        PS C:\> Remove-OpenHereWindowsPowerShellShortcut -Verbose
+        Removes the default shortcut from the system and the removing process will be verbose to user.
+    .LINK
+        https://github.com/KUTlime/PowerShell-Open-Here-Module
+    .INPUTS
+        void
+    .OUTPUTS
+        The shell shortcut is removed from the context menu.
+    .NOTES
+        The context menu can be invoked from the menu button and by the right mouse button click.
+        On some system, the some error can occur during removal process. These errors are mostly harmless.
+    #>
     [CmdletBinding()]
     Param (
     )
