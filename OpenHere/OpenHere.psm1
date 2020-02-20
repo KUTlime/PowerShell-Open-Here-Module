@@ -1,12 +1,56 @@
-function Get-IconAsset
+enum ShellType
 {
-  New-Item "$env:LOCALAPPDATA\WindowsPowerShell" -ItemType Directory -Force
-  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-  $wc = New-Object System.Net.WebClient
-  $wc.DownloadFile('https://raw.githubusercontent.com/KUTlime/PowerShell-Open-Here-Module/master/assets/PowerShell.ico', "$env:LOCALAPPDATA\WindowsPowerShell\PowerShell.ico")
+    WindowsPowerShell
+    PowerShellCore
+    Terminal
 }
 
-function Set-WindowsPowerShellShortcut
+function Get-ShellType
+{
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            Mandatory = $true,
+            ValueFromPipeline = $true,
+            ValueFromPipelineByPropertyName = $true,
+            ValueFromRemainingArguments = $false,
+            Position = 0,
+            ParameterSetName = 'Basic')]
+        [ValidateNotNullOrEmpty()]
+        [ShellType]
+        $ShellType
+    )
+    switch ($ShellType)
+    {
+        ([ShellType]::WindowsPowerShell) { return 'WindowsPowerShell' }
+        ([ShellType]::PowerShellCore) { return 'PowerShellCore' }
+        ([ShellType]::Terminal) { return 'Terminal' }
+        Default { throw [System.ArgumentOutOfRangeException]::('Unknown Shell type.') }
+    }
+}
+
+function Get-IconAsset
+{
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            Mandatory = $true,
+            ValueFromPipeline = $true,
+            ValueFromPipelineByPropertyName = $true,
+            ValueFromRemainingArguments = $false,
+            Position = 0,
+            ParameterSetName = 'Basic')]
+        [ValidateNotNullOrEmpty()]
+        [String]
+        $ShellType
+    )
+    New-Item "$env:LOCALAPPDATA\OpenHere\$ShellType" -ItemType Directory -Force | Write-Verbose
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    $wc = New-Object System.Net.WebClient
+    $wc.DownloadFile('https://raw.githubusercontent.com/KUTlime/PowerShell-Open-Here-Module/master/assets/PowerShell.ico', "$env:LOCALAPPDATA\OpenHere\$ShellType\Icon.ico")
+}
+
+function Set-OpenHereWindowsPowerShellShortcut
 {
     [CmdletBinding()]
     Param (
@@ -38,10 +82,9 @@ function Set-WindowsPowerShellShortcut
         [String]
         $OpenHereAsAdmin = "Open here as Administrator"
     )
+
     $registryKeyName = 'WindowsPowerShell'
-    Get-IconAsset
-    $iconFile = Get-ChildItem -Path $env:LOCALAPPDATA\WindowsPowerShell\PowerShell.ico
-    New-PSDrive -PSProvider registry -Root HKEY_CLASSES_ROOT -Name HKCR | Write-Verbose
+
     function Set-RegistryKey
     {
         [CmdletBinding()]
@@ -67,6 +110,12 @@ function Set-WindowsPowerShellShortcut
         New-Item -Path $Path\$registryKeyName\shell\runas\command -Value "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -command Set-Location '%V'" -Force -ErrorAction:Continue | Write-Verbose
         New-Item -Path $Path\$registryKeyName\shell\openpowershell\command -Value "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -command Set-Location '%V'" -Force -ErrorAction:Continue | Write-Verbose
     }
+
+    $ShellType = Get-ShellType -ShellType $registryKeyName
+    Get-IconAsset -ShellType $ShellType
+    $iconFile = Get-ChildItem -Path "$env:LOCALAPPDATA\OpenHere\$ShellType\Icon.ico"
+    New-PSDrive -PSProvider registry -Root HKEY_CLASSES_ROOT -Name HKCR | Write-Verbose
+
     Set-RegistryKey -Path HKCR:\LibraryFolder\background\shell
     Set-RegistryKey -Path HKCR:\Drive\shell
     Set-RegistryKey -Path HKCR:\Directory\shell
@@ -81,20 +130,66 @@ function Set-WindowsPowerShellShortcut
     Set-RegistryKeyWithCommand -Path HKCR:\Directory\ContextMenus
     Set-RegistryKeyWithCommand -Path HKCR:\SOFTWARE\Classes\Directory\ContextMenus
 
-    New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\runas -Name MUIVerb -Value $OpenHereAsAdmin -Force
-    New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\runas -Name Icon -Value $iconFile.FullName -Force
-    New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\runas -Name HasLUAShield -Value "" -Force
+    New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\runas -Name MUIVerb -Value $OpenHereAsAdmin -Force | Write-Verbose
+    New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\runas -Name Icon -Value $iconFile.FullName -Force | Write-Verbose
+    New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\runas -Name HasLUAShield -Value "" -Force | Write-Verbose
 
-    New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\openpowershell -Name MUIVerb -Value $OpenHere -Force
-    New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\openpowershell -Name Icon -Value $iconFile.FullName -Force
+    New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\openpowershell -Name MUIVerb -Value $OpenHere -Force | Write-Verbose
+    New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\openpowershell -Name Icon -Value $iconFile.FullName -Force | Write-Verbose
+
+    Write-Host "The configuration of Open here shortucut has been completed."
 }
 
-function Remove-WindowsPowerShellShortcut
+function Remove-OpenHereWindowsPowerShellShortcut
 {
     [CmdletBinding()]
     Param (
     )
-    throw [System.NotImplementedException]::new()
+    $registryKeyName = 'WindowsPowerShell'
+
+    function Remove-RegistryKey
+    {
+        [CmdletBinding()]
+        param (
+            [Parameter()]
+            [String]
+            $Path
+        )
+        Remove-Item -Path $Path\$registryKeyName -Force -ErrorAction:Continue | Write-Verbose
+    }
+
+    function Remove-RegistryKeyWithCommand
+    {
+        [CmdletBinding()]
+        param (
+            [Parameter()]
+            [String]
+            $Path
+        )
+        Remove-Item -Path $Path\$registryKeyName\shell\runas\command -Force -ErrorAction:Continue | Write-Verbose
+        Remove-Item -Path $Path\$registryKeyName\shell\openpowershell\command -Force -ErrorAction:Continue | Write-Verbose
+    }
+
+    $ShellType = Get-ShellType -ShellType $registryKeyName
+    Get-IconAsset -ShellType $ShellType
+    Get-ChildItem -Path "$env:LOCALAPPDATA\OpenHere\$ShellType\Icon.ico" | Remove-Item -Force | Write-Verbose
+    New-PSDrive -PSProvider registry -Root HKEY_CLASSES_ROOT -Name HKCR | Write-Verbose
+
+    Remove-RegistryKey -Path HKCR:\LibraryFolder\background\shell
+    Remove-RegistryKey -Path HKCR:\Drive\shell
+    Remove-RegistryKey -Path HKCR:\Directory\shell
+    Remove-RegistryKey -Path HKCR:\Directory\Background\shell
+    Remove-RegistryKey -Path HKCR:\DesktopBackground\Shell
+    Remove-RegistryKey -Path HKLM:\SOFTWARE\Classes\Drive\shell
+    Remove-RegistryKey -Path HKLM:\SOFTWARE\Classes\Directory\shell
+    Remove-RegistryKey -Path HKLM:\SOFTWARE\Classes\Directory\background\shell
+    Remove-RegistryKey -Path HKLM:\SOFTWARE\Classes\DesktopBackground\Shell
+    Remove-RegistryKey -Path HKLM:\SOFTWARE\Classes\LibraryFolder\background\shell
+
+    Remove-RegistryKeyWithCommand -Path HKCR:\Directory\ContextMenus
+    Remove-RegistryKeyWithCommand -Path HKCR:\SOFTWARE\Classes\Directory\ContextMenus
+
+    Write-Host "The configuration of Open here shortucut has been removed."
 }
 
 
