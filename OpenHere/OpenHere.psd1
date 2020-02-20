@@ -12,7 +12,7 @@
 RootModule = 'OpenHere'
 
 # Version number of this module.
-ModuleVersion = '1.0.0'
+ModuleVersion = '1.0.1'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -33,7 +33,7 @@ Copyright = '(c) Radek Zahradník, Ph.D. All rights reserved.'
 Description = 'This module that enables "Open here" shortcuts functionality for PowerShell.'
 
 # Minimum version of the PowerShell engine required by this module
-PowerShellVersion = '1.0.0.0'
+PowerShellVersion = '5.0.0.0'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
@@ -111,6 +111,9 @@ PrivateData = @{
 
         # ReleaseNotes of this module
         ReleaseNotes = @'
+v1.0.1: (2020-02-20)
+- Fixing minimal PowerShell version from 1.x to 5.0.
+
 v1.0.0: (2020-02-20)
 - Initial release
 - Implementation for Windows PowerShell shortcut.
