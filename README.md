@@ -85,4 +85,5 @@ No, the shortcut names supports Unicode and this is only limitation as I'm aware
 
 # Attribution
 [Get-Icon](https://github.com/Duffney/PowerShell/blob/master/FileSystems/Get-Icon.ps1)<br>
+[CMD icon](https://www.iconfinder.com/icons/16824/cmd_icon)
 [PowerShell icon](https://www.freeiconspng.com/downloadimg/17194)
