@@ -161,7 +161,7 @@ function Get-OpenHereShortcutSetup
             $shellSetup.RegistryKeyName = 'CommandPrompt'
             $shellSetup.ShellType = 'CMD'
             $shellSetup.CommandRoot = 'opencmd'
-            $shellSetup.CommandExecutionValue = "cmd.exe /s /k pushd '%V'"
+            $shellSetup.CommandExecutionValue = 'cmd.exe /s /k pushd "%V"'
         }
         <#([ShortcutType]::PowerShellCore) { return 'PowerShell Core' }#>
         ([ShortcutType]::Terminal)
