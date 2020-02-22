@@ -12,7 +12,7 @@
     RootModule         = 'OpenHere'
 
     # Version number of this module.
-    ModuleVersion      = '1.0.4'
+    ModuleVersion      = '1.1.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -69,7 +69,7 @@
     # NestedModules = @()
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport  = @('Set-OpenHereWindowsPowerShellShortcut', 'Remove-OpenHereWindowsPowerShellShortcut')
+    FunctionsToExport  = @('Set-OpenHereShortcut', 'Remove-OpenHereShortcut')
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
     CmdletsToExport    = @()
@@ -111,8 +111,14 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+v1.1.0: (2020-02-21)
+- Support for Microsoft Terminal.
+- Function renaming.
+- Function refactoring into general implementation.
+- Function's parameter documentation has been extended.
+
 v1.0.4: (2020-02-20)
-- Fix of relelease notes
+- Fix of relelease notes.
 
 v1.0.3: (2020-02-20)
 - Documentation update.
