@@ -12,7 +12,7 @@
     RootModule         = 'OpenHere'
 
     # Version number of this module.
-    ModuleVersion      = '1.1.0'
+    ModuleVersion      = '2.0.1'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -111,6 +111,9 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+v2.0.1: (2020-02-23)
+- Manifest update fix.
+
 v2.0.0: (2020-02-23)
 - Support for Microsoft Terminal.
 - Support for MS Command Prompt
