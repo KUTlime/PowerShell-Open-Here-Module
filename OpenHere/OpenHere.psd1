@@ -12,7 +12,7 @@
     RootModule         = 'OpenHere'
 
     # Version number of this module.
-    ModuleVersion      = '2.0.1'
+    ModuleVersion      = '2.0.2'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -111,6 +111,10 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+v2.0.2: (2020-02-23)
+- Terminal was renamed to Windows Terminal to respect the official name.
+- Enum value Terminal was changed to WindowsTerminal to respect the official name.
+
 v2.0.1: (2020-02-23)
 - Manifest update fix.
 

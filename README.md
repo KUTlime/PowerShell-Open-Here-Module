@@ -1,5 +1,5 @@
 # PowerShell "Open Here" Module
-PowerShell module that enables "Open here" shortcuts functionality for Windows PowerShell, Terminal and CMD.
+PowerShell module that enables "Open here" shortcuts functionality for Windows PowerShell, Windows Terminal and CMD.
 
 # Introduction
 OpenHere is a PowerShell module for installation of shell shortcuts into the context menu (_the right mouse button click or [the menu key](https://en.wikipedia.org/wiki/Menu_key)_) for Microsoft Windows.
@@ -10,7 +10,7 @@ The shortcuts will open desired shell in the current location, e.g. for Windows 
 
 
 # Main features
-- Shortcut installation/removal for Windows PowerShell, Terminal, CMD
+- Shortcut installation/removal for Windows PowerShell, Windows Terminal, CMD
 - Open here with non-elevated privileges shortcut.
 - Open here with elevated privileges shortcut.
 - Default setting for easy-to-use.
@@ -35,13 +35,13 @@ Set-OpenHereShortcut -ShortcutType:WindowsPowerShell
 
 For other shortcuts just type:
 ```powershell
-Set-OpenHereShortcut -ShortcutType:Terminal
+Set-OpenHereShortcut -ShortcutType:WindowsTerminal
 Set-OpenHereShortcut -ShortcutType:CMD
 ```
 
 For a custom shortcut & command names, fill parameters accordingly:
 ```powershell
-Set-OpenHereShortcut -ShortcutType:Terminal -RootName 'Old PowerShell' -OpenHere 'I''m lazy' -OpenHereAsAdmin 'I''m lazy admin`
+Set-OpenHereShortcut -ShortcutType:WindowsPowerShell -RootName 'Old PowerShell' -OpenHere 'I''m lazy' -OpenHereAsAdmin 'I''m lazy admin`
 ```
 
 or the equivalent with the escape backtick:
@@ -56,13 +56,13 @@ Set-OpenHereShortcut -ShortcutType:WindowsPowerShell`
 
 To remove the shortcut with any settings, just call:
 ```powershell
-Remove-OpenHereShortcut -ShortcutType:Terminal
+Remove-OpenHereShortcut -ShortcutType:WindowsTerminal
 ```
 
 For more details about setting/removing process, type:
 ```powershell
-Set-OpenHereShortcut -ShortcutType:Terminal -Verbose
-Remove-OpenHereShortcut -ShortcutType:Terminal -Verbose
+Set-OpenHereShortcut -ShortcutType:WindowsTerminal -Verbose
+Remove-OpenHereShortcut -ShortcutType:WindowsTerminal -Verbose
 ```
 respectively. 
 
@@ -72,7 +72,7 @@ Get-Help Set-OpenHereShortcut -Examples
 ```
 
 # Notes
-Microsoft Terminal doesn't responds to RunAs request from the context menu. This problem is under investigation.
+Windows Terminal doesn't responds to RunAs request from the context menu. This problem is under investigation.
 
 # FAQ
 ### Are there any plans to extend the functionality of this module?
