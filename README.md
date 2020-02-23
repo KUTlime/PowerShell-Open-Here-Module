@@ -75,16 +75,16 @@ Get-Help Set-OpenHereShortcut -Examples
 Microsoft Terminal doesn't responds to RunAs request from the context menu. This problem is under investigation.
 
 # FAQ
-## Are there any plans to extend the functionality of this module?
+### Are there any plans to extend the functionality of this module?
 Yes, see the section [Planned features.](https://github.com/KUTlime/PowerShell-Open-Here-Module#Planned-features)
 
-## Can I customize the shortcut icon?
+### Can I customize the shortcut icon?
 Yes, override the `Icon.ico` file in `%LOCALAPPDATA%\OpenHere\[ShellType]` and you are good to go.
 
-## Can I override the names?
+### Can I override the names?
 Yes, just run `Set-OpenHereShortcut` with a new configuration.
 
-## Is the name limited to English?
+### Is the name limited to English?
 No, the shortcut names supports Unicode and this is only limitation as I'm aware of.
 
 # Planned features
