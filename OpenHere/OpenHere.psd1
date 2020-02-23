@@ -95,7 +95,7 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags                     = @('WindowsPowerShell', 'OpenHere', 'Open', 'Here', 'Shortcut')
+            Tags                     = @('WindowsPowerShell', 'OpenHere', 'Open', 'Here', 'Shortcut', 'CMD')
 
             # A URL to the license for this module.
             LicenseUri               = 'https://github.com/KUTlime/PowerShell-Open-Here-Module/blob/master/LICENSE'
@@ -111,11 +111,14 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
-v1.1.0: (2020-02-21)
+v2.0.0: (2020-02-23)
 - Support for Microsoft Terminal.
-- Function renaming.
+- Support for MS Command Prompt
 - Function refactoring into general implementation.
-- Function's parameter documentation has been extended.
+- Function renaming.
+- Function example extension.
+- Function parameters documentation has been extended.
+- General documentation update.
 
 v1.0.4: (2020-02-20)
 - Fix of relelease notes.
