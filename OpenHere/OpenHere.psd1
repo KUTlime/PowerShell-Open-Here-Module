@@ -12,7 +12,7 @@
     RootModule         = 'OpenHere'
 
     # Version number of this module.
-    ModuleVersion      = '1.0.4'
+    ModuleVersion      = '1.1.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -69,7 +69,7 @@
     # NestedModules = @()
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport  = @('Set-OpenHereWindowsPowerShellShortcut', 'Remove-OpenHereWindowsPowerShellShortcut')
+    FunctionsToExport  = @('Set-OpenHereShortcut', 'Remove-OpenHereShortcut')
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
     CmdletsToExport    = @()
@@ -95,7 +95,7 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags                     = @('WindowsPowerShell', 'OpenHere', 'Open', 'Here', 'Shortcut')
+            Tags                     = @('WindowsPowerShell', 'OpenHere', 'Open', 'Here', 'Shortcut', 'CMD')
 
             # A URL to the license for this module.
             LicenseUri               = 'https://github.com/KUTlime/PowerShell-Open-Here-Module/blob/master/LICENSE'
@@ -111,8 +111,17 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+v2.0.0: (2020-02-23)
+- Support for Microsoft Terminal.
+- Support for MS Command Prompt
+- Function refactoring into general implementation.
+- Function renaming.
+- Function example extension.
+- Function parameters documentation has been extended.
+- General documentation update.
+
 v1.0.4: (2020-02-20)
-- Fix of relelease notes
+- Fix of relelease notes.
 
 v1.0.3: (2020-02-20)
 - Documentation update.
