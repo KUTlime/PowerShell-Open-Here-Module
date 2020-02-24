@@ -72,7 +72,7 @@ Get-Help Set-OpenHereShortcut -Examples
 ```
 
 # Notes
-Windows Terminal doesn't responds to RunAs request from the context menu. This problem is under investigation. A nasty workaround has been implemented to support Windows Terminal shortcut with elevated privileges. 
+Windows Terminal doesn't responds to RunAs request from the context menu. This problem is a limitation of the UWP platform. A workaround has been implemented to support Windows Terminal shortcut with elevated privileges.
 
 # FAQ
 ### Are there any plans to extend the functionality of this module?
