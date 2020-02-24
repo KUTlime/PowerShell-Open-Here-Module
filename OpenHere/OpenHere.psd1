@@ -12,7 +12,7 @@
     RootModule         = 'OpenHere'
 
     # Version number of this module.
-    ModuleVersion      = '2.0.2'
+    ModuleVersion      = '2.0.3'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -95,7 +95,7 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags                     = @('WindowsPowerShell', 'OpenHere', 'Open', 'Here', 'Shortcut', 'CMD')
+            Tags                     = @('WindowsPowerShell', 'OpenHere', 'Open', 'Here', 'Shortcut', 'CMD', 'WindowsTerminal')
 
             # A URL to the license for this module.
             LicenseUri               = 'https://github.com/KUTlime/PowerShell-Open-Here-Module/blob/master/LICENSE'
@@ -111,6 +111,9 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+v2.0.3: (2020-02-24)
+- A workaround for Windows Terminal open here as admin has been added.
+
 v2.0.2: (2020-02-23)
 - Terminal was renamed to Windows Terminal to respect the official name.
 - Enum value Terminal was changed to WindowsTerminal to respect the official name.
