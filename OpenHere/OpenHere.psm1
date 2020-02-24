@@ -27,6 +27,7 @@ function Get-OpenHereShortcutSetup
         RegistryKeyName       = "" <#A root registry identification.#>
         CommandRoot           = "" <#A shell registry name, open[shellname]#>
         CommandExecutionValue = "" <#A shell command value that is written as execution on click.#>
+        CommandExecutionValueRunAs = "" <#A shell command value that is written as execution on click.#>
     }
     switch ($ShortcutType)
     {
@@ -37,6 +38,7 @@ function Get-OpenHereShortcutSetup
             $shellSetup.ShellType = 'WindowsPowerShell'
             $shellSetup.CommandRoot = 'openpowershell'
             $shellSetup.CommandExecutionValue = "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -command Set-Location '%V'"
+            $shellSetup.CommandExecutionValueRunAs = "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noexit -command Set-Location '%V'"
         }
         ([ShortcutType]::CMD)
         {
@@ -45,6 +47,7 @@ function Get-OpenHereShortcutSetup
             $shellSetup.ShellType = 'CMD'
             $shellSetup.CommandRoot = 'opencmd'
             $shellSetup.CommandExecutionValue = 'cmd.exe /s /k pushd "%V"'
+            $shellSetup.CommandExecutionValueRunAs = 'cmd.exe /s /k pushd "%V"'
         }
         <#([ShortcutType]::PowerShellCore) { return 'PowerShell Core' }#>
         ([ShortcutType]::WindowsTerminal)
@@ -54,6 +57,7 @@ function Get-OpenHereShortcutSetup
             $shellSetup.ShellType = 'WindowsTerminal'
             $shellSetup.CommandRoot = 'openWindowsTerminal'
             $shellSetup.CommandExecutionValue = "$env:LOCALAPPDATA\Microsoft\WindowsApps\wt.exe -d ."
+            $shellSetup.CommandExecutionValueRunAs = "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noninteractive -noprofile -command Set-Location '%V';start-process wt -argumentList '-d .'"
         }
         Default { throw [System.ArgumentOutOfRangeException]::('Unknown Shell type.') }
     }
@@ -122,7 +126,7 @@ function Set-OpenHereShortcut
     .NOTES
         To override the default shortcut icon, override the Icon.ico file in %LOCALAPPDATA%\OpenHere\[ShellType].
         The context menu can be invoked from the menu button and by the right mouse button click.
-        Windows Terminal doesn't response to Run as Administrator. No explanation is provided so far.
+        Windows Terminal doesn't response to Run as Administrator. No explanation is provided so far. The support is
     #>
     [CmdletBinding()]
     Param (
@@ -194,9 +198,8 @@ function Set-OpenHereShortcut
             $Path
         )
         $cmdRoot = $shellShortcutSetup.CommandRoot
-        $value = $shellShortcutSetup.CommandExecutionValue
-        New-Item -Path $Path\$registryKeyName\shell\runas\command -Value $value -Force -ErrorAction:Continue | Write-Verbose
-        New-Item -Path $Path\$registryKeyName\shell\$cmdRoot\command -Value $value -Force -ErrorAction:Continue | Write-Verbose
+        New-Item -Path $Path\$registryKeyName\shell\runas\command -Value $($shellShortcutSetup.CommandExecutionValueRunAs) -Force -ErrorAction:Continue | Write-Verbose
+        New-Item -Path $Path\$registryKeyName\shell\$cmdRoot\command -Value $($shellShortcutSetup.CommandExecutionValue) -Force -ErrorAction:Continue | Write-Verbose
     }
 
     $ShellType = $shellShortcutSetup.ShellType
