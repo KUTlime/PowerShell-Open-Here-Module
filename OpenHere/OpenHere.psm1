@@ -56,8 +56,8 @@ function Get-OpenHereShortcutSetup
             $shellSetup.RegistryKeyName = 'WindowsTerminal'
             $shellSetup.ShellType = 'WindowsTerminal'
             $shellSetup.CommandRoot = 'openWindowsTerminal'
-            $shellSetup.CommandExecutionValue = "$env:LOCALAPPDATA\Microsoft\WindowsApps\wt.exe -d ."
-            $shellSetup.CommandExecutionValueRunAs = "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noninteractive -noprofile -command Set-Location '%V';start-process wt -argumentList '-d .'"
+            $shellSetup.CommandExecutionValue = "$env:LOCALAPPDATA\Microsoft\WindowsApps\wt.exe -d %V"
+            $shellSetup.CommandExecutionValueRunAs = "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noninteractive -noprofile -command Set-Location '%V';start-process wt -argumentList '-d %V'"
         }
         Default { throw [System.ArgumentOutOfRangeException]::('Unknown Shell type.') }
     }
