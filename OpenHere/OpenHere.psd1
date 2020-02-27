@@ -12,7 +12,7 @@
     RootModule         = 'OpenHere'
 
     # Version number of this module.
-    ModuleVersion      = '2.0.3'
+    ModuleVersion      = '2.0.4'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -111,6 +111,10 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+v2.0.4: (2020-02-27)
+- A workaround for Windows Terminal open here shortcut when RMB on directory/drive letter has been added.
+- From this version, both Windows Terminal Open here shortcuts use Windows PowerShell for a correct startup.
+
 v2.0.3: (2020-02-24)
 - A workaround for Windows Terminal open here as admin has been added.
 

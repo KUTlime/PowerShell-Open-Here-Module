@@ -56,7 +56,7 @@ function Get-OpenHereShortcutSetup
             $shellSetup.RegistryKeyName = 'WindowsTerminal'
             $shellSetup.ShellType = 'WindowsTerminal'
             $shellSetup.CommandRoot = 'openWindowsTerminal'
-            $shellSetup.CommandExecutionValue = "$env:LOCALAPPDATA\Microsoft\WindowsApps\wt.exe -d ."
+            $shellSetup.CommandExecutionValue = "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noninteractive -noprofile -command Set-Location '%V';start-process wt -argumentList '-d .'"
             $shellSetup.CommandExecutionValueRunAs = "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noninteractive -noprofile -command Set-Location '%V';start-process wt -argumentList '-d .'"
         }
         Default { throw [System.ArgumentOutOfRangeException]::('Unknown Shell type.') }
@@ -126,7 +126,7 @@ function Set-OpenHereShortcut
     .NOTES
         To override the default shortcut icon, override the Icon.ico file in %LOCALAPPDATA%\OpenHere\[ShellType].
         The context menu can be invoked from the menu button and by the right mouse button click.
-        Windows Terminal doesn't response to Run as Administrator. No explanation is provided so far. The support is
+        Windows Terminal doesn't responds to RunAs request from the context menu. This problem is a limitation of the UWP platform. A workaround has been implemented to support Windows Terminal shortcut with elevated privileges. A similar workaround had to be implemented for non-elevated Open here Windows Terminal shortcut to support scenarios when requests are invoked from RMB clicks on a directory or a drive letter.
     #>
     [CmdletBinding()]
     Param (
