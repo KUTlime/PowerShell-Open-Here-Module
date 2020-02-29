@@ -30,7 +30,7 @@
     Copyright          = '(c) Radek Zahradník, Ph.D. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description        = 'This module that enables "Open here" shortcuts functionality for PowerShell.'
+    Description        = 'This module enables "Open here" shortcuts functionality for various shells.'
 
     # Minimum version of the PowerShell engine required by this module
     PowerShellVersion  = '5.0.0.0'
