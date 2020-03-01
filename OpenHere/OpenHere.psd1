@@ -12,7 +12,7 @@
     RootModule         = 'OpenHere'
 
     # Version number of this module.
-    ModuleVersion      = '2.0.4'
+    ModuleVersion      = '2.0.5'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -30,7 +30,7 @@
     Copyright          = '(c) Radek Zahradník, Ph.D. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description        = 'This module enables "Open here" shortcuts functionality for various shells.'
+    Description        = 'This module enables "Open here" shortcuts functionality for various shells like Windows PowerShell, Command line, Windows Terminal.'
 
     # Minimum version of the PowerShell engine required by this module
     PowerShellVersion  = '5.0.0.0'
@@ -111,6 +111,9 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+v2.0.5: (2020-03-01)
+- Manifest description update.
+
 v2.0.4: (2020-02-27)
 - A workaround for Windows Terminal open here shortcut when RMB on directory/drive letter has been added.
 - From this version, both Windows Terminal Open here shortcuts use Windows PowerShell for a correct startup.
