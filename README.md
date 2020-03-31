@@ -41,7 +41,7 @@ Set-OpenHereShortcut -ShortcutType:CMD
 
 For a custom shortcut & command names, fill parameters accordingly:
 ```powershell
-Set-OpenHereShortcut -ShortcutType:WindowsPowerShell -RootName 'Old PowerShell' -OpenHere 'I''m lazy' -OpenHereAsAdmin 'I''m lazy admin`
+Set-OpenHereShortcut -ShortcutType:WindowsPowerShell -RootName 'Old PowerShell' -OpenHere 'I''m lazy' -OpenHereAsAdmin 'I''m lazy admin'
 ```
 
 or the equivalent with the escape backtick:
