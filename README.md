@@ -1,5 +1,5 @@
 # PowerShell "Open Here" Module
-PowerShell module that enables "Open here" shortcuts functionality for Windows PowerShell, PowerShell Core, Windows Terminal and CMD.
+PowerShell module that enables "Open here" shortcuts functionality for Windows PowerShell, PowerShell Core, Windows Terminal, Bash and CMD.
 
 # Introduction
 OpenHere is a PowerShell module for installation of shell shortcuts into the context menu (_the right mouse button click or [the menu key](https://en.wikipedia.org/wiki/Menu_key)_) for Microsoft Windows.
@@ -97,4 +97,6 @@ No, the shortcut names supports Unicode and this is only limitation as I'm aware
 [CMD icon](https://www.iconfinder.com/icons/16824/cmd_icon)<br>
 [PowerShell icon](https://www.freeiconspng.com/downloadimg/17194)<br>
 [PowerShell Core icon](https://github.com/PowerShell/PowerShell/tree/master/assets)<br>
+[WSLBash icon](https://github.com/odb/official-bash-logo)<br>
+[PNG to icon online converter](https://hnet.com/png-to-ico/)<br>
 [PNG to base64 online converter](https://onlinepngtools.com/convert-png-to-base64)
