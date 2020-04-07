@@ -96,4 +96,5 @@ No, the shortcut names supports Unicode and this is only limitation as I'm aware
 [Get-Icon](https://github.com/Duffney/PowerShell/blob/master/FileSystems/Get-Icon.ps1)<br>
 [CMD icon](https://www.iconfinder.com/icons/16824/cmd_icon)<br>
 [PowerShell icon](https://www.freeiconspng.com/downloadimg/17194)<br>
-[PowerShell Core icon](https://github.com/PowerShell/PowerShell/tree/master/assets)
+[PowerShell Core icon](https://github.com/PowerShell/PowerShell/tree/master/assets)<br>
+[PNG to base64 online converter](https://onlinepngtools.com/convert-png-to-base64)
