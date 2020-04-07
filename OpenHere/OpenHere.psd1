@@ -12,7 +12,7 @@
     RootModule         = 'OpenHere'
 
     # Version number of this module.
-    ModuleVersion      = '2.0.5'
+    ModuleVersion      = '3.0.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -111,6 +111,9 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+v3.0.0: (2020-03-07)
+- Support for PowerShell Core 7 RTM x64 (or any x64 major version)
+
 v2.0.5: (2020-03-01)
 - Manifest description update.
 

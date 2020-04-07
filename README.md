@@ -1,5 +1,5 @@
 # PowerShell "Open Here" Module
-PowerShell module that enables "Open here" shortcuts functionality for Windows PowerShell, Windows Terminal and CMD.
+PowerShell module that enables "Open here" shortcuts functionality for Windows PowerShell, PowerShell Core, Windows Terminal and CMD.
 
 # Introduction
 OpenHere is a PowerShell module for installation of shell shortcuts into the context menu (_the right mouse button click or [the menu key](https://en.wikipedia.org/wiki/Menu_key)_) for Microsoft Windows.
@@ -15,7 +15,7 @@ The shortcuts will open desired shell in the current location, e.g. for Windows 
 - Open here with elevated privileges shortcut.
 - Default setting for easy-to-use.
 - Fully customizable shortcut names.
-- Shortcut availability on directory, drive, directory background, user's desktop.
+- Shortcut availability on **directory, drive, directory background, user's desktop**.
 - Rollback of all shell modifications.
 - Works offline.
 - Well documented
@@ -25,6 +25,7 @@ To install the OpenHere module, just type following command into your PowerShell
 
 ```powershell
 Install-Module -Name OpenHere
+Import-Module -Name OpenHere
 ```
 
 Now, you can use the module as you wish. For shortcut installation:
@@ -37,6 +38,7 @@ For other shortcuts just type:
 ```powershell
 Set-OpenHereShortcut -ShortcutType:WindowsTerminal
 Set-OpenHereShortcut -ShortcutType:CMD
+Set-OpenHereShortcut -ShortcutType:PowerShellCore
 ```
 
 For a custom shortcut & command names, fill parameters accordingly:
@@ -87,15 +89,11 @@ Yes, just run `Set-OpenHereShortcut` with a new configuration.
 ### Is the name limited to English?
 No, the shortcut names supports Unicode and this is only limitation as I'm aware of.
 
-# Planned features
-* PowerShell Core
-  * A customizable functionality. The Windows installation of PowerShell Core doesn't support any customization of the shell shortcuts so far.
-  * Waiting for PowerShell Core 7.0.0 RTM as primary support target.
-
 # Links
 [OpenHere module at PowerShell Gallery](https://www.powershellgallery.com/packages/OpenHere)
 
-# Attribution
+# Attributions
 [Get-Icon](https://github.com/Duffney/PowerShell/blob/master/FileSystems/Get-Icon.ps1)<br>
-[CMD icon](https://www.iconfinder.com/icons/16824/cmd_icon)
-[PowerShell icon](https://www.freeiconspng.com/downloadimg/17194)
+[CMD icon](https://www.iconfinder.com/icons/16824/cmd_icon)<br>
+[PowerShell icon](https://www.freeiconspng.com/downloadimg/17194)<br>
+[PowerShell Core icon](https://github.com/PowerShell/PowerShell/tree/master/assets)
