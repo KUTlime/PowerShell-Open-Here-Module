@@ -114,6 +114,7 @@
 v3.0.0: (2020-04-07)
 - Support for PowerShell Core 7 RTM x64 (or any x64 major version)
 - Support for WSL/Bash
+- Shell shortcut icons can be derived from shells' EXE binaries.
 
 v2.0.5: (2020-03-01)
 - Manifest description update.
