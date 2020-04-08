@@ -81,7 +81,7 @@ Windows Terminal doesn't responds to RunAs request from the context menu. This p
 Yes, see the section [Planned features.](https://github.com/KUTlime/PowerShell-Open-Here-Module#Planned-features)
 
 ### Can I customize the shortcut icon?
-Yes, override the `Icon.ico` file in `%LOCALAPPDATA%\OpenHere\[ShellType]` and you are good to go.
+By default, OpenHere module uses its own icons in shell context menus. If the `-UseExeIcon` switch is used when shortcut is created, the default icons are **not** generated. These default icons are written in `%LOCALAPPDATA%\OpenHere\[ShellType]`. Every shell has its own `Icon.ico` file in the corresponding subfolder. You can customize icons by overriding these `Icon.ico` files.
 
 ### Can I override the names?
 Yes, just run `Set-OpenHereShortcut` with a new configuration.
