@@ -295,7 +295,7 @@ function Set-OpenHereShortcut
     New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\$($shellShortcutSetup.CommandRoot) -Name MUIVerb -Value $OpenHere -Force | Write-Verbose
     New-ItemProperty -Path HKCR:\Directory\ContextMenus\$registryKeyName\shell\$($shellShortcutSetup.CommandRoot) -Name Icon -Value $shellShortcutSetup.IconPath -Force | Write-Verbose
 
-    Write-Host "The configuration of Open here shortucut has been completed."
+    Write-Host "The configuration of Open here shortcut has been completed."
 }
 
 function Remove-OpenHereShortcut
