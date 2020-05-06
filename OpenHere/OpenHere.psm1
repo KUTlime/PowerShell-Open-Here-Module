@@ -84,9 +84,9 @@ function Get-OpenHereShortcutSetup
             $shellSetup.CommandExecutionValue = "pwsh.exe -NoExit -RemoveWorkingDirectoryTrailingCharacter -WorkingDirectory `"%V!`" -Command `"`$host.UI.RawUI.WindowTitle = 'PowerShell $psVersion (x64)'`""
             $shellSetup.CommandExecutionValueRunAs = "pwsh.exe -NoExit -RemoveWorkingDirectoryTrailingCharacter -WorkingDirectory `"%V!`" -Command `"`$host.UI.RawUI.WindowTitle = 'PowerShell $psVersion (x64)'`""
             $shellSetup.IconPath = ($env:Path -split ';' |
-             Where-Object {($_ -like '*PowerShell*') -and ($_ -notlike '*WindowsPowerShell*')} |
-             Sort-Object -Property Length |
-             Select-Object -First 1) + 'pwsh.exe'
+                Where-Object { ($_ -like '*PowerShell*') -and ($_ -notlike '*WindowsPowerShell*') } |
+                Sort-Object -Property Length |
+                Select-Object -First 1) + 'pwsh.exe'
         }
         ([ShortcutType]::WindowsTerminal)
         {
@@ -94,11 +94,11 @@ function Get-OpenHereShortcutSetup
             $shellSetup.RegistryKeyName = 'WindowsTerminal'
             $shellSetup.ShellType = 'WindowsTerminal'
             $shellSetup.CommandRoot = 'openWindowsTerminal'
-            $shellSetup.CommandExecutionValue = "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noninteractive -noprofile -command Set-Location '%V';start-process wt -argumentList '-d .'"
-            $shellSetup.CommandExecutionValueRunAs = "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noninteractive -noprofile -command Set-Location '%V';start-process wt -argumentList '-d .'"
+            $shellSetup.CommandExecutionValue = "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noninteractive -noprofile -command Set-Location -LiteralPath '%V';start-process wt -argumentList '-d .'"
+            $shellSetup.CommandExecutionValueRunAs = "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe -noninteractive -noprofile -command Set-Location -LiteralPath '%V';start-process wt -argumentList '-d .'"
             $shellSetup.IconPath = (Get-ChildItem -Path "$env:ProgramFiles\WindowsApps" -Filter 'WindowsTerminal.exe' -Recurse |
-            Sort-Object -Property LastWriteTimeUtc -Descending |
-            Select-Object -First 1).FullName
+                Sort-Object -Property LastWriteTimeUtc -Descending |
+                Select-Object -First 1).FullName
         }
         Default { throw [System.ArgumentOutOfRangeException]::('Unknown Shell type.') }
     }
@@ -123,6 +123,8 @@ function Set-OpenHereShortcut
         Defines the elevated privileges shortcut name. If omitted, the default value "Open here as Administrator" will be used.
     .PARAMETER UseExeIcon
         A switch parameter which indicates that the icon from EXE binary file will be used as a shell shortcut icon.
+    .PARAMETER UseShift
+        A switch parameter which indicates that the Open Here shortcut should appear only when Shift key is pressed.
     .EXAMPLE
         PS C:\> Set-OpenHereShortcut -ShortcutType:WindowsPowerShell
         Creates the default Windows PowerShell shortcut in the system. "Windows PowerShell" as root folder name, "Open here" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used.
@@ -167,10 +169,16 @@ function Set-OpenHereShortcut
         Creates the default WSL Bash shortcut in the system. "WSL Bash" as root folder name, "Open here" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used.
     .EXAMPLE
         PS C:\> Set-OpenHereShortcut -ShortcutType:WSLBash -UseExeIcon
-        Creates the default WSL Bash shortcut in the system. "WSL Bash" as root folder name, "Open here" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used. The CMD icon will be used as the shortcut icon because the WSL Bash terminal is hosted by CMD.
+        Creates a customized WSL Bash shortcut in the system. "WSL Bash" as root folder name, "Open here" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used. The CMD icon will be used as the shortcut icon because the WSL Bash terminal is hosted by CMD.
     .EXAMPLE
-        PS C:\> Set-OpenHereShortcut -ShortcutType:WindowsPowerShell
-        Creates the default Windows PowerShell shortcut in the system. "Windows PowerShell" as root folder name, "Open here" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used. The native Windows PowerShell icon derived from powershell.exe will be used as the the shortcut icon.
+        PS C:\> Set-OpenHereShortcut -ShortcutType:WindowsPowerShell -UseExeIcon
+        Creates a customized Windows PowerShell shortcut in the system. "Windows PowerShell" as root folder name, "Open here" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used. The native Windows PowerShell icon derived from powershell.exe will be used as the the shortcut icon.
+    .EXAMPLE
+        PS C:\> Set-OpenHereShortcut -ShortcutType:WindowsPowerShell -UseShift
+        Creates a customized Windows PowerShell shortcut in the system. "Windows PowerShell" as root folder name, "Open here" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used. The shortcut will be visible in the right mouse button context menu only if SHIFT key is pressed together with the right mouse button.
+    .EXAMPLE
+        PS C:\> Set-OpenHereShortcut -ShortcutType:CMD -UseExeIcon -UseShift
+        Creates a customized Command prompt shortcut in the system. "Command Prompt" as root folder name, "Open here" as non-elevated privileges command name and "Open here as Administrator" elevated privileges command name will be used. The shortcut will be visible in the right mouse button context menu only if SHIFT key is pressed together with the right mouse button. The CMD icon from cmd.exe will be used as the shortcut icon.
     .LINK
         https://github.com/KUTlime/PowerShell-Open-Here-Module
     .INPUTS
@@ -229,7 +237,15 @@ function Set-OpenHereShortcut
             Position = 3,
             ParameterSetName = 'Basic')]
         [Switch]
-        $UseExeIcon
+        $UseExeIcon,
+        [Parameter(
+            ValueFromPipeline = $true,
+            ValueFromPipelineByPropertyName = $true,
+            ValueFromRemainingArguments = $false,
+            Position = 4,
+            ParameterSetName = 'Basic')]
+        [Switch]
+        $UseShift
     )
     $shellShortcutSetup = Get-OpenHereShortcutSetup -ShortcutType $ShortcutType
     $registryKeyName = $shellShortcutSetup.RegistryKeyName
@@ -237,19 +253,31 @@ function Set-OpenHereShortcut
     {
         $RootName = $shellShortcutSetup.DefaultRootName
     }
-
+    Write-Host "Starting to configure Windows registry to create a new Open Here shortcut for $($shellShortcutSetup.DefaultRootName)."
     function Set-RegistryKey
     {
         [CmdletBinding()]
         param (
             [Parameter()]
             [String]
-            $Path
+            $Path,
+            [Parameter(
+                ValueFromPipeline = $true,
+                ValueFromPipelineByPropertyName = $true,
+                ValueFromRemainingArguments = $false,
+                Position = 4,
+                ParameterSetName = 'Basic')]
+            [Switch]
+            $UseShift
         )
         New-Item -Path $Path\$registryKeyName -Force -ErrorAction:Continue | Write-Verbose
         New-ItemProperty -Path $Path\$registryKeyName -Name MUIVerb -Value $RootName -Force -ErrorAction:Continue | Write-Verbose
         New-ItemProperty -Path $Path\$registryKeyName -Name Icon -Value $shellShortcutSetup.IconPath -Force -ErrorAction:Continue | Write-Verbose
         New-ItemProperty -Path $Path\$registryKeyName -Name ExtendedSubCommandsKey -Value "Directory\ContextMenus\$registryKeyName" -Force -ErrorAction:Continue | Write-Verbose
+        if ($UseShift)
+        {
+            New-ItemProperty -Path $Path\$registryKeyName -Name Extended -Value '' -Force -ErrorAction:Continue | Write-Verbose
+        }
     }
 
     function Set-RegistryKeyWithCommand
@@ -274,16 +302,16 @@ function Set-OpenHereShortcut
 
     New-PSDrive -PSProvider registry -Root HKEY_CLASSES_ROOT -Name HKCR | Write-Verbose
 
-    Set-RegistryKey -Path HKCR:\LibraryFolder\background\shell
-    Set-RegistryKey -Path HKCR:\Drive\shell
-    Set-RegistryKey -Path HKCR:\Directory\shell
-    Set-RegistryKey -Path HKCR:\Directory\Background\shell
-    Set-RegistryKey -Path HKCR:\DesktopBackground\Shell
-    Set-RegistryKey -Path HKLM:\SOFTWARE\Classes\Drive\shell
-    Set-RegistryKey -Path HKLM:\SOFTWARE\Classes\Directory\shell
-    Set-RegistryKey -Path HKLM:\SOFTWARE\Classes\Directory\background\shell
-    Set-RegistryKey -Path HKLM:\SOFTWARE\Classes\DesktopBackground\Shell
-    Set-RegistryKey -Path HKLM:\SOFTWARE\Classes\LibraryFolder\background\shell
+    Set-RegistryKey -Path HKCR:\LibraryFolder\background\shell -UseShift:$UseShift
+    Set-RegistryKey -Path HKCR:\Drive\shell -UseShift:$UseShift
+    Set-RegistryKey -Path HKCR:\Directory\shell -UseShift:$UseShift
+    Set-RegistryKey -Path HKCR:\Directory\Background\shell -UseShift:$UseShift
+    Set-RegistryKey -Path HKCR:\DesktopBackground\Shell -UseShift:$UseShift
+    Set-RegistryKey -Path HKLM:\SOFTWARE\Classes\Drive\shell -UseShift:$UseShift
+    Set-RegistryKey -Path HKLM:\SOFTWARE\Classes\Directory\shell -UseShift:$UseShift
+    Set-RegistryKey -Path HKLM:\SOFTWARE\Classes\Directory\background\shell -UseShift:$UseShift
+    Set-RegistryKey -Path HKLM:\SOFTWARE\Classes\DesktopBackground\Shell -UseShift:$UseShift
+    Set-RegistryKey -Path HKLM:\SOFTWARE\Classes\LibraryFolder\background\shell -UseShift:$UseShift
 
     Set-RegistryKeyWithCommand -Path HKCR:\Directory\ContextMenus
     Set-RegistryKeyWithCommand -Path HKCR:\SOFTWARE\Classes\Directory\ContextMenus

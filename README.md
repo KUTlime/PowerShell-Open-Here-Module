@@ -10,15 +10,17 @@ The shortcuts will open desired shell in the current location, e.g. for Windows 
 
 
 # Main features
-- Shortcut installation/removal for Windows PowerShell, Windows Terminal, CMD
+- Shortcut installation/removal for Windows PowerShell, Windows Terminal, CMD, PowerShell Core, Bash
 - Open here with non-elevated privileges shortcut.
 - Open here with elevated privileges shortcut.
+- Shortcut availability on **directory, drive, directory background, user's desktop**.
 - Default setting for easy-to-use.
 - Fully customizable shortcut names.
-- Shortcut availability on **directory, drive, directory background, user's desktop**.
+- Fully customizable shortcut icon.
+- Capability of showing the shortcut only if the SHIFT key is pressed.
 - Rollback of all shell modifications.
 - Works offline.
-- Well documented
+- Well documented.
 
 # Basic use
 To install the OpenHere module, just type following command into your PowerShell session with elevated privileges.
@@ -68,6 +70,16 @@ Remove-OpenHereShortcut -ShortcutType:WindowsTerminal -Verbose
 ```
 respectively. 
 
+For the default EXE icons as the shortcut icons, use `-UseExeIcon`:
+```powershell
+Set-OpenHereShortcut -ShortcutType:WindowsTerminal -UseExeIcon
+```
+
+To show the Open Here shortcut only if the SHIFT key is pressed and the right mouse button is clicked, use `-UseShift`:
+```powershell
+Set-OpenHereShortcut -ShortcutType:WindowsTerminal -UseShift
+```
+
 For more examples, type: 
 ```powershell
 Get-Help Set-OpenHereShortcut -Examples
@@ -83,11 +95,14 @@ Yes, see the section [Planned features.](https://github.com/KUTlime/PowerShell-O
 ### Can I customize the shortcut icon?
 By default, OpenHere module uses its own icons in shell context menus. If the `-UseExeIcon` switch is used when shortcut is created, the default icons are **not** generated. These default icons are written in `%LOCALAPPDATA%\OpenHere\[ShellType]`. Every shell has its own `Icon.ico` file in the corresponding subfolder. You can customize icons by overriding these `Icon.ico` files.
 
-### Can I override the names?
+### Can I override the names and setup?
 Yes, just run `Set-OpenHereShortcut` with a new configuration.
 
 ### Is the name limited to English?
 No, the shortcut names supports Unicode and this is only limitation as I'm aware of.
+
+### Windows Command Prompt icon looks weird when Windows Black theme is turn on. What should I do?
+You could either run `Set-OpenHereShortcut` again with `-UseExeIcon` or override the icon by some other ico file. Have a look at the previous FAQ about the shortcut icon customization for details.
 
 # Links
 [OpenHere module at PowerShell Gallery](https://www.powershellgallery.com/packages/OpenHere)
