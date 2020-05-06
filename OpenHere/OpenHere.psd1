@@ -112,9 +112,11 @@
             # ReleaseNotes of this module
             ReleaseNotes             = @'
 v3.0.0: (2020-05-06)
-- Support for PowerShell Core 7 RTM x64 (or any x64 major version).
-- Support for WSL/Bash.
-- Shell shortcut icons can be derived from shells' EXE binaries.
+- New: Support for PowerShell Core 7 RTM x64 (or any x64 major version).
+- New: Support for WSL/Bash.
+- New: User is noticed at the beginning of shortcut configuration.
+- Changed: Shell shortcut icons can be derived from shells' EXE binaries.
+- Fixed: Windows Terminal shortcut to paths with '[' or ']' characters.
 
 v2.0.5: (2020-03-01)
 - Manifest description update.
