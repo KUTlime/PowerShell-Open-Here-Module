@@ -14,6 +14,7 @@ steps:
   displayName: 'Run a one-line script'
 
 - task: PowerShell@2
+  displayName: 'Executing of Publish Module script'
   inputs:
     filePath: 'PublishModule.ps1'
     arguments: '$(NugetApiKey)'
