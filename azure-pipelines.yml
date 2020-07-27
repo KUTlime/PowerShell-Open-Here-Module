@@ -13,11 +13,11 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- task: PowerShell@2
-  displayName: 'Executing of Publish Module script'
-  inputs:
-    filePath: '$(System.DefaultWorkingDirectory)\PublishModule.ps1'
-    arguments: '$(NugetApiKey)'
+#- task: PowerShell@2
+#  displayName: 'Executing of Publish Module script'
+#  inputs:
+#    filePath: '$(System.DefaultWorkingDirectory)\PublishModule.ps1'
+#    arguments: '$(NugetApiKey)'
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
