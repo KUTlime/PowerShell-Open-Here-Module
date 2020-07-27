@@ -18,3 +18,11 @@ steps:
   inputs:
     filePath: '$(System.DefaultWorkingDirectory)\PublishModule.ps1'
     arguments: '$(NugetApiKey)'
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      Write-Host "Hello World"
+      Get-ChildItem
