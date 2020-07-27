@@ -9,6 +9,7 @@ pr:
 pool:
   vmImage: 'windows-latest'
 
+steps:
 - task: PowerShell@2
   displayName: 'Executing of Publish Module script'
   inputs:
