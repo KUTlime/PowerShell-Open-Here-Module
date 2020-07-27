@@ -16,5 +16,5 @@ steps:
 - task: PowerShell@2
   displayName: 'Executing of Publish Module script'
   inputs:
-    filePath: 'PublishModule.ps1'
+    filePath: "$(System.DefaultWorkingDirectory)\PublishModule.ps1"
     arguments: '$(NugetApiKey)'
