@@ -12,7 +12,7 @@
     RootModule         = 'OpenHere'
 
     # Version number of this module.
-    ModuleVersion      = '3.0.0'
+    ModuleVersion      = '3.1.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -111,6 +111,13 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+v3.1.0: (2020-08-08)
+- New: Support for "NoRoot" parameter to place shortcuts directly to context menu.
+- New: Support for "SharedRoot" parameter to place all shortcuts into one common shared root folder in the menu.
+- New: CI/CD pipeline in Azure DevOps
+- Update: Parameters description for Remove-OpenHereShort function.
+- Update: The help for Set-OpenHereShortcut has been updated with a new functionality and examples.
+
 v3.0.0: (2020-05-06)
 - New: Support for PowerShell Core 7 RTM x64 (or any x64 major version).
 - New: Support for WSL/Bash.
