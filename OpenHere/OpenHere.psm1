@@ -333,9 +333,11 @@ function Remove-OpenHereShortcut
         Removes the Open here shortcut.
     .DESCRIPTION
         Removes the Open here shortcut from all locations in the system shell.
+    .PARAMETER ShortcutType
+        Defines the shortcut type from the supported collection of shortcuts.
     .EXAMPLE
         PS C:\> Remove-OpenHereShortcut -ShortcutType:WindowsTerminal
-        Removes the   shortcut from all location in the system shell.
+        Removes the shortcut from all location in the system shell.
     .EXAMPLE
         PS C:\> Remove-OpenHereShortcut -ShortcutType:WindowsPowerShell
         Removes the Windows PowerShell shortcut from all location in the system shell.
